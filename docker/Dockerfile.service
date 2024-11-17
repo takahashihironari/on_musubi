@@ -5,7 +5,6 @@ WORKDIR /app/service
 
 RUN npm install -g pnpm
 
-# COPYパスの修正 - contextからの相対パス
 COPY service/package.json service/pnpm-lock.yaml ./
 
 RUN ls -l /app/service
@@ -13,6 +12,8 @@ RUN ls -l /app/service
 RUN pnpm install
 
 EXPOSE 4000
+
+
 
 # 本番環境
 FROM node:18-slim as production

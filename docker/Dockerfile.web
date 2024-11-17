@@ -11,6 +11,8 @@ RUN pnpm install
 
 EXPOSE 3000
 
+
+
 # 本番環境
 FROM node:18-slim as production
 
