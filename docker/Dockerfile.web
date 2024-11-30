@@ -1,0 +1,37 @@
+# 開発環境
+FROM node:18-slim as development
+
+WORKDIR /app/web
+
+RUN apt-get update && apt-get install -y procps
+
+RUN npm install -g pnpm
+
+COPY web/package.json web/pnpm-lock.yaml ./
+
+RUN pnpm install
+
+EXPOSE 3000
+
+CMD ["pnpm", "dev"]
+
+
+# 本番環境
+FROM node:18-slim as production
+
+WORKDIR /app/web
+
+RUN npm install -g pnpm
+
+COPY web/package.json web/pnpm-lock.yaml ./
+
+RUN pnpm install --frozen-lockfile
+
+COPY web/ ./
+
+ENV NEXT_TELEMETRY_DISABLED 1
+ENV NODE_ENV production
+
+RUN pnpm build
+
+CMD ["pnpm", "start"]

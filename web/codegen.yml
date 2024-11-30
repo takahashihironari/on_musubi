@@ -1,0 +1,8 @@
+schema: "http://localhost:4000/graphql" # NestJSサーバーのGraphQLエンドポイント
+documents: "src/**/*.graphql" # GraphQLクエリやミューテーションが記述されたファイルのパス
+generates:
+  src/generated/graphql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-urql"
