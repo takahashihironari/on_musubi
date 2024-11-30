@@ -18,7 +18,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "dev": "nest start --watch"
+    "dev": "nest start --watch",
+    "generate-typings": "ts-node ./src/generate-typings.ts"
   },
   "dependencies": {
     "@nestjs/apollo": "^12.2.1",
@@ -31,7 +32,8 @@
     "graphql": "^16.9.0",
     "prisma": "^5.22.0",
     "reflect-metadata": "^0.2.0",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "ts-morph": "^24.0.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
