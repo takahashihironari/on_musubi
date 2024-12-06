@@ -3,7 +3,11 @@ FROM node:18-slim as development
 
 WORKDIR /app/service
 
-RUN apt-get update && apt-get install -y procps
+# OpenSSLとその他の必要なライブラリを追加
+RUN apt-get update && apt-get install -y \
+    procps \
+    openssl \
+    libssl-dev
 
 RUN npm install -g pnpm
 
@@ -22,11 +26,19 @@ FROM node:18-slim as production
 
 WORKDIR /app/service
 
+# 本番環境でもOpenSSLは必要
+RUN apt-get update && apt-get install -y \
+    openssl \
+    libssl-dev
+
 RUN npm install -g pnpm
 
 COPY service/package.json service/pnpm-lock.yaml ./
 
 RUN pnpm install --frozen-lockfile
+
+# Prismaのジェネレート
+RUN pnpm prisma generate
 
 COPY service/ ./
 
