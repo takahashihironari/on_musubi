@@ -1,20 +1,21 @@
-import { CreateUserInput } from './../../graphql';
+import { CreateUserInput, CreateUserResponse } from './../../graphql';
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
 import { UserUseCase } from '../domain/service/user.usecase';
 
 @Resolver()
 export class UserResolver {
-  constructor(private UserUseCase: UserUseCase) {}
+  constructor(private userUseCase: UserUseCase) {}
 
-  @Mutation(() => Number)
-  async createUser(@Args('createUserInput') request: CreateUserInput) {
-    await this.UserUseCase.createUser(
+  @Mutation(() => CreateUserResponse)
+  async createUser(
+    @Args('createUserInput') request: CreateUserInput,
+  ): Promise<CreateUserResponse> {
+    await this.userUseCase.createUser(
       request.name,
       request.email,
       request.password,
     );
-    return {
-      status: 200,
-    };
+
+    return { status: 200 };
   }
 }

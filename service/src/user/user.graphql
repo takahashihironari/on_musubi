@@ -4,6 +4,10 @@ input CreateUserInput {
   password: String!
 }
 
+type CreateUserResponse {
+  status: Int!
+}
+
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): Int!
+  createUser(createUserInput: CreateUserInput!): CreateUserResponse!
 }

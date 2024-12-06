@@ -17,10 +17,14 @@ export abstract class IQuery {
   abstract hello(): Nullable<string> | Promise<Nullable<string>>;
 }
 
+export class CreateUserResponse {
+  status: number;
+}
+
 export abstract class IMutation {
   abstract createUser(
     createUserInput: CreateUserInput,
-  ): number | Promise<number>;
+  ): CreateUserResponse | Promise<CreateUserResponse>;
 }
 
 type Nullable<T> = T | null;
