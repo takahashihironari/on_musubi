@@ -6,6 +6,7 @@ import { AuthService } from './auth.service';
 import { AuthResolver } from './auth.resolver';
 import { JwtStrategy } from './jwt.strategy';
 import { UserModule } from 'src/user/user.module';
+import { PrismaModule } from 'src/prisma.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { UserModule } from 'src/user/user.module';
       signOptions: { expiresIn: '1h' },
     }),
     UserModule,
+    PrismaModule,
   ],
   providers: [AuthService, UserUseCase, AuthResolver, JwtStrategy],
   exports: [AuthService],

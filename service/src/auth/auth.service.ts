@@ -12,13 +12,14 @@ export class AuthService {
 
   async login(email: string, password: string) {
     const user = await this.userService.findByEmail(email);
-
     if (!user || !(await bcrypt.compare(password, user.password))) {
       throw new Error('Invalid credentials');
     }
 
     const payload = { username: user.username, sub: 2 };
+
     const accessToken = this.jwtService.sign(payload);
+    console.log(accessToken);
     return { accessToken };
   }
 }

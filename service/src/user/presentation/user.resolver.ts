@@ -15,7 +15,6 @@ export class UserResolver {
       request.email,
       request.password,
     );
-
     return { status: 200 };
   }
 }
