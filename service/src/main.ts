@@ -13,6 +13,5 @@ async function bootstrap() {
   logger.log('アプリケーションを起動中');
 
   await app.listen(4000);
-  logger.log(`アプリケーションは http://localhost:4000 で起動しました`);
 }
 bootstrap();
