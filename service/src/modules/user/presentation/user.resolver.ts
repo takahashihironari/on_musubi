@@ -1,4 +1,4 @@
-import { CreateUserInput, CreateUserResponse } from './../../graphql';
+import { CreateUserInput, CreateUserResponse } from './../../../graphql';
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
 import { UserUseCase } from '../domain/service/user.usecase';
 
