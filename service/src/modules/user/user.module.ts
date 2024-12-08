@@ -4,7 +4,7 @@ import { UserUseCase } from '../user/domain/service/user.usecase';
 
 import { UserResolver } from './presentation/user.resolver';
 import { UserProjectionRepository } from './infrastructure/userProjection.repository';
-import { PrismaModule } from 'src/prisma.module';
+import { PrismaModule } from 'src/db/prisma.module';
 
 @Module({
   imports: [PrismaModule],
