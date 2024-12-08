@@ -10,7 +10,7 @@ async function bootstrap() {
 
   // グローバルロガーの設定
   const logger = new Logger('Bootstrap');
-  logger.log('アプリケーションを起動中');
+  logger.log('Application is running on: http://localhost:4000');
 
   await app.listen(4000);
 }
