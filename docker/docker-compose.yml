@@ -37,6 +37,7 @@ services:
       - DB_PASSWORD=password
     volumes:
       - ../service:/app/service
+      - /app/service/node_modules
     command: pnpm dev
     depends_on:
       mysql:
@@ -70,4 +71,5 @@ volumes:
 
 networks:
   app-network:
+    name: app-network
     driver: bridge
