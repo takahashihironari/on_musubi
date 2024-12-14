@@ -1,5 +1,5 @@
-import { Module } from '@nestjs/common';
-import { JwtModule } from '@nestjs/jwt';
+import { Module, forwardRef } from '@nestjs/common';
+import { JwtModule, JwtService } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './jwt.strategy';
 import { PrismaModule } from 'src/db/prisma.module';
@@ -15,10 +15,10 @@ import { AuthResolver } from './presentation/auth.resolver';
       secret: process.env.JWT_SECRET || 'your_secret_key',
       signOptions: { expiresIn: '1h' },
     }),
-    UserModule,
+    forwardRef(() => UserModule),
     PrismaModule,
   ],
-  providers: [AuthService, UserUseCase, AuthResolver, JwtStrategy],
-  exports: [AuthService],
+  providers: [AuthService, UserUseCase, AuthResolver, JwtStrategy, JwtService],
+  exports: [AuthService, JwtStrategy], // JwtServiceとJwtStrategyをエクスポート
 })
 export class AuthModule {}

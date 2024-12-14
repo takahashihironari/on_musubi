@@ -1,10 +1,14 @@
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
 import { LoginInput, LoginResponse } from 'src/graphql';
 import { AuthService } from '../domain/service/auth.service';
+import { JwtStrategy } from '../jwt.strategy';
 
 @Resolver()
 export class AuthResolver {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private JwtStrategy: JwtStrategy,
+  ) {}
 
   @Mutation(() => LoginResponse)
   async login(
@@ -14,6 +18,14 @@ export class AuthResolver {
       loginInput.email,
       loginInput.password,
     );
-    return { accessToken: result.accessToken };
+    const isPasswordValid = this.JwtStrategy.compareByBcrypt(
+      loginInput.password,
+      result.accessToken,
+    );
+    if (isPasswordValid) {
+      return { accessToken: result.accessToken };
+    } else {
+      throw new Error('Invalid password');
+    }
   }
 }

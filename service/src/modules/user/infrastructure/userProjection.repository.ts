@@ -19,7 +19,7 @@ export class UserProjectionRepository {
     });
   }
 
-  async findByEmail(email: string) {
+  async findByEmail(email: string): Promise<on_musubi_user_projection> {
     return this.prisma.on_musubi_user_projection.findFirst({
       where: {
         email: email,

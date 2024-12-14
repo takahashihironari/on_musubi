@@ -8,6 +8,16 @@ type CreateUserResponse {
   status: Int!
 }
 
+type User {
+  name: String!
+  email: String!
+  password: String!
+}
+
+type Query {
+  findUserByEmail(email: String!, password: String!): User!
+}
+
 type Mutation {
   createUser(createUserInput: CreateUserInput!): CreateUserResponse!
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UserProjectionRepository } from '../../infrastructure/userProjection.repository';
 import { User } from '../model/user';
+import { on_musubi_user_projection } from '@prisma/client';
 
 @Injectable()
 export class UserUseCase {
@@ -11,7 +12,7 @@ export class UserUseCase {
     await this.userProjectionRepository.createUser(user);
   }
 
-  async findByEmail(email: string) {
+  async findUserByEmail(email: string): Promise<on_musubi_user_projection> {
     return await this.userProjectionRepository.findByEmail(email);
   }
 }
